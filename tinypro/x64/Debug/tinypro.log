@@ -1,0 +1,4 @@
+﻿  tinypro.cpp
+d:\soft_projects\tinypro\tinypro\tinypro\tinypro.cpp(37): warning C4244: 'initializing': conversion from 'float' to 'uint8_t', possible loss of data
+d:\soft_projects\tinypro\tinypro\tinypro\tinypro.cpp(38): warning C4244: 'initializing': conversion from 'float' to 'uint8_t', possible loss of data
+  tinypro.vcxproj -> D:\soft_projects\tinypro\tinypro\x64\Debug\tinypro.exe
