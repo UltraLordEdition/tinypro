@@ -2,3 +2,7 @@
 /.vs/tinypro/v15/*.db
 /.vs/tinypro/v15/ipch/*.ipch
 /.vs/tinypro/v15/ipch/AutoPCH/2eb8a05905543bbb/*.ipch
+/x64
+/x64/Debug/tinypro.exe
+/x64/Debug/tinypro.ilk
+/x64/Debug/tinypro.pdb
