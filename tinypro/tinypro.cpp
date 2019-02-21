@@ -39,6 +39,7 @@ void draw_rectangle(std::vector<uint32_t> &img, const size_t img_w, const size_t
             size_t cx = x + i;
             size_t cy = y + j;
             assert(cx < img_w && cy < img_h);
+            if (cx >= img_w || cy >= img_h) continue; // no need to check negative values, (unsigned variables)
             img[cx + cy * img_w] = color;
         }
     }
@@ -46,8 +47,8 @@ void draw_rectangle(std::vector<uint32_t> &img, const size_t img_w, const size_t
 
 
 int main() {
-    const size_t win_w = 512; // image width
-    const size_t win_h = 512; // image height
+    const size_t win_w = 1024; // image width
+    const size_t win_h = 512;  // image height
     std::vector<uint32_t> framebuffer(win_w*win_h, 255); // the image itself, initialized to red
 
     const size_t map_w = 16; // map width
@@ -75,7 +76,7 @@ int main() {
     float player_y = 2.345;         // player y position
     float player_a = 1.523;         // player view direction
     const float fov = M_PI / 3.;    // field of view
-
+    
     for (size_t j = 0; j < win_h; j++) {        // fill the screen with color gradients
         for (size_t i = 0; i < win_w; i++) {
             uint8_t r = 255 * j / float(win_h); // varies between 0 and 255 as j sweeps the vertical
@@ -83,9 +84,9 @@ int main() {
             uint8_t b = 0;
             framebuffer[i + j * win_w] = pack_color(r, g, b);
         }
-    }   
+    }
 
-    const size_t rect_w = win_w / map_w;
+    const size_t rect_w = win_w / (map_w*2);
     const size_t rect_h = win_h / map_h;
     for (size_t j = 0; j < map_h; j++) {        // draw the map
         for (size_t i = 0; i < map_w; i++) {
@@ -96,21 +97,24 @@ int main() {
         }
     }
 
-    // draw the player on the map
-    draw_rectangle(framebuffer, win_w, win_h, player_x*rect_w, player_y*rect_h, 5, 5, pack_color(255, 255, 255));
-
-    for (size_t i = 0; i < win_w; i++) {        // draw the visibility cone
-        float angle = player_a - fov / 2 + fov * i / float(win_w);
-
+    for (size_t i=0; i<win_w/2; i++) { // draw the visibility cone AND the "3D" view
+        float angle = player_a-fov/2 + fov*i/float(win_w/2);
         // trace of the first ray
         for (float t = 0; t < 20; t += .05) {
             float cx = player_x + t * cos(angle);
-            float cy = player_y + t * sin(angle);
-            if (map[int(cx) + int(cy)*map_w] != ' ') break;
+            float cy = player_y + t * sin(angle);           
 
             size_t pix_x = cx * rect_w;
             size_t pix_y = cy * rect_h;
-            framebuffer[pix_x + pix_y * win_w] = pack_color(255, 255, 255);
+            // this draws the visibility cone
+            framebuffer[pix_x + pix_y * win_w] = pack_color(160, 160, 160);
+            // our ray touches a wall, so draw the vertical column to create an illusion of 3D
+            if (map[int(cx) + int(cy)*map_w] != ' ') { 
+                size_t column_height = win_h / t;
+                draw_rectangle(framebuffer, win_w, win_h, win_w / 2 + i, win_h / 2 - column_height / 2, 1, column_height, pack_color(0, 255, 255));
+                break;
+            }
+
         }
     }
 
