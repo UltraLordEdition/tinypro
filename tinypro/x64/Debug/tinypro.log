@@ -1,4 +1,7 @@
 ﻿  tinypro.cpp
-d:\soft_projects\tinypro\tinypro\tinypro\tinypro.cpp(73): warning C4244: 'initializing': conversion from 'float' to 'uint8_t', possible loss of data
-d:\soft_projects\tinypro\tinypro\tinypro\tinypro.cpp(74): warning C4244: 'initializing': conversion from 'float' to 'uint8_t', possible loss of data
+d:\soft_projects\tinypro\tinypro\tinypro\tinypro.cpp(71): warning C4305: 'initializing': truncation from 'double' to 'float'
+d:\soft_projects\tinypro\tinypro\tinypro\tinypro.cpp(72): warning C4305: 'initializing': truncation from 'double' to 'float'
+d:\soft_projects\tinypro\tinypro\tinypro\tinypro.cpp(76): warning C4244: 'initializing': conversion from 'float' to 'uint8_t', possible loss of data
+d:\soft_projects\tinypro\tinypro\tinypro\tinypro.cpp(77): warning C4244: 'initializing': conversion from 'float' to 'uint8_t', possible loss of data
+d:\soft_projects\tinypro\tinypro\tinypro\tinypro.cpp(95): warning C4244: 'argument': conversion from 'float' to 'const size_t', possible loss of data
   tinypro.vcxproj -> D:\soft_projects\tinypro\tinypro\x64\Debug\tinypro.exe
