@@ -1,12 +1,11 @@
 ﻿  tinypro.cpp
-d:\soft_projects\tinypro\tinypro\tinypro\tinypro.cpp(75): warning C4305: 'initializing': truncation from 'double' to 'float'
-d:\soft_projects\tinypro\tinypro\tinypro\tinypro.cpp(76): warning C4305: 'initializing': truncation from 'double' to 'float'
 d:\soft_projects\tinypro\tinypro\tinypro\tinypro.cpp(77): warning C4305: 'initializing': truncation from 'double' to 'float'
 d:\soft_projects\tinypro\tinypro\tinypro\tinypro.cpp(78): warning C4305: 'initializing': truncation from 'double' to 'float'
-d:\soft_projects\tinypro\tinypro\tinypro\tinypro.cpp(82): warning C4244: 'initializing': conversion from 'float' to 'uint8_t', possible loss of data
-d:\soft_projects\tinypro\tinypro\tinypro\tinypro.cpp(83): warning C4244: 'initializing': conversion from 'float' to 'uint8_t', possible loss of data
-d:\soft_projects\tinypro\tinypro\tinypro\tinypro.cpp(103): warning C4305: '+=': truncation from 'double' to 'float'
-d:\soft_projects\tinypro\tinypro\tinypro\tinypro.cpp(107): warning C4244: 'initializing': conversion from 'float' to 'size_t', possible loss of data
-d:\soft_projects\tinypro\tinypro\tinypro\tinypro.cpp(108): warning C4244: 'initializing': conversion from 'float' to 'size_t', possible loss of data
-d:\soft_projects\tinypro\tinypro\tinypro\tinypro.cpp(113): warning C4244: 'initializing': conversion from 'float' to 'size_t', possible loss of data
+d:\soft_projects\tinypro\tinypro\tinypro\tinypro.cpp(79): warning C4305: 'initializing': truncation from 'double' to 'float'
+d:\soft_projects\tinypro\tinypro\tinypro\tinypro.cpp(80): warning C4305: 'initializing': truncation from 'double' to 'float'
+d:\soft_projects\tinypro\tinypro\tinypro\tinypro.cpp(94): warning C4305: '+=': truncation from 'double' to 'float'
+d:\soft_projects\tinypro\tinypro\tinypro\tinypro.cpp(112): warning C4305: '+=': truncation from 'double' to 'float'
+d:\soft_projects\tinypro\tinypro\tinypro\tinypro.cpp(116): warning C4244: 'initializing': conversion from 'float' to 'size_t', possible loss of data
+d:\soft_projects\tinypro\tinypro\tinypro\tinypro.cpp(117): warning C4244: 'initializing': conversion from 'float' to 'size_t', possible loss of data
+d:\soft_projects\tinypro\tinypro\tinypro\tinypro.cpp(124): warning C4244: 'initializing': conversion from 'float' to 'size_t', possible loss of data
   tinypro.vcxproj -> D:\soft_projects\tinypro\tinypro\x64\Debug\tinypro.exe
