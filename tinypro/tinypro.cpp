@@ -5,11 +5,11 @@
 #include "profile.h"
 #include <iostream>
 #include <fstream>
-#include <sstream>
-#include <iomanip>
 #include <vector>
 #include <cstdint>
 #include <cassert>
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
 
 uint32_t pack_color(const uint8_t r, const uint8_t g, const uint8_t b, const uint8_t a = 255) {
     return (a << 24) + (b << 16) + (g << 8) + r;
@@ -39,14 +39,48 @@ void draw_rectangle(std::vector<uint32_t> &img, const size_t img_w, const size_t
     for (size_t i = 0; i < w; i++) {
         for (size_t j = 0; j < h; j++) {
             size_t cx = x + i;
-            size_t cy = y + j;
-            assert(cx < img_w && cy < img_h);
+            size_t cy = y + j;          
             if (cx >= img_w || cy >= img_h) continue; // no need to check negative values, (unsigned variables)
             img[cx + cy * img_w] = color;
         }
     }
 }
+// Load textures
+bool load_texture(const std::string filename, std::vector<uint32_t> &texture, size_t &text_size, size_t &text_cnt) {
+    int nchannels = -1, w, h;
+    unsigned char *pixmap = stbi_load(filename.c_str(), &w, &h, &nchannels, 0);
+    if (!pixmap) {
+        std::cerr << "Error: can not load the textures" << std::endl;
+        return false;
+    }
 
+    if (4 != nchannels) {
+        std::cerr << "Error: the texture must be a 32 bit image" << std::endl;
+        stbi_image_free(pixmap);
+        return false;
+    }
+
+    text_cnt = w / h;
+    text_size = w / text_cnt;
+    if (w != h * int(text_cnt)) {
+        std::cerr << "Error: the texture file must contain N square textures packed horizontally" << std::endl;
+        stbi_image_free(pixmap);
+        return false;
+    }
+
+    texture = std::vector<uint32_t>(w*h);
+    for (int j = 0; j < h; j++) {
+        for (int i = 0; i < w; i++) {
+            uint8_t r = pixmap[(i + j * w) * 4 + 0];
+            uint8_t g = pixmap[(i + j * w) * 4 + 1];
+            uint8_t b = pixmap[(i + j * w) * 4 + 2];
+            uint8_t a = pixmap[(i + j * w) * 4 + 3];
+            texture[i + j * w] = pack_color(r, g, b, a);
+        }
+    }
+    stbi_image_free(pixmap);
+    return true;
+}
 
 int main() {
     const size_t win_w = 1024; // image width
@@ -85,16 +119,17 @@ int main() {
         colors[i] = pack_color(rand() % 255, rand() % 255, rand() % 255);
     }
     
+    std::vector<uint32_t> walltext; // textures for the walls
+    size_t walltext_size;  // texture dimensions (it is a square)
+    size_t walltext_cnt;   // number of different textures in the image
+    if (!load_texture("walltext.png", walltext, walltext_size, walltext_cnt)) {
+        std::cerr << "Failed to load wall textures" << std::endl;
+        return -1;
+    }
+
     const size_t rect_w = win_w / (map_w*2);
     const size_t rect_h = win_h / map_h;
-
-    for (size_t frame = 0; frame < 360; frame++) {
-        std::stringstream ss;
-        ss << std::setfill('0') << std::setw(5) << frame << ".ppm";
-        player_a += 2 * M_PI / 360;
-
-        framebuffer = std::vector<uint32_t>(win_w*win_h, pack_color(255, 255, 255)); // clear the screen
-
+    
         for (size_t j = 0; j < map_h; j++) { // draw the map
             for (size_t i = 0; i < map_w; i++) {
                 if (map[i + j * map_w] == ' ') continue; // skip empty spaces
@@ -122,15 +157,21 @@ int main() {
                     size_t icolor = map[int(cx) + int(cy)*map_w] - '0';
                     assert(icolor < ncolors);
                     // Correction of Fish Eye
-                    size_t column_height = win_h / (t*cos(angle-player_a));
+                    size_t column_height = win_h / (t*cos(angle - player_a));
                     draw_rectangle(framebuffer, win_w, win_h, win_w / 2 + i, win_h / 2 - column_height / 2, 1, column_height, colors[icolor]);
                     break;
                 }
             }
         }
-        drop_ppm_image(ss.str(), framebuffer, win_w, win_h);
-        cout << "frame: " << frame << endl;
-    }
+            const size_t texid = 4; // draw the 4th texture on the screen
+            for (size_t i = 0; i < walltext_size; i++) {
+                for (size_t j = 0; j < walltext_size; j++) {
+                    framebuffer[i + j * win_w] = walltext[i + texid * walltext_size + j * walltext_size*walltext_cnt];
+                }
+        }
+        drop_ppm_image("./out.ppm", framebuffer, win_w, win_h);
+        cout << "frame: " << endl;
+    //}
 
     return 0;
 }
