@@ -7,5 +7,5 @@ d:\soft_projects\tinypro\tinypro\tinypro\tinypro.cpp(94): warning C4305: '+=': t
 d:\soft_projects\tinypro\tinypro\tinypro\tinypro.cpp(112): warning C4305: '+=': truncation from 'double' to 'float'
 d:\soft_projects\tinypro\tinypro\tinypro\tinypro.cpp(116): warning C4244: 'initializing': conversion from 'float' to 'size_t', possible loss of data
 d:\soft_projects\tinypro\tinypro\tinypro\tinypro.cpp(117): warning C4244: 'initializing': conversion from 'float' to 'size_t', possible loss of data
-d:\soft_projects\tinypro\tinypro\tinypro\tinypro.cpp(124): warning C4244: 'initializing': conversion from 'float' to 'size_t', possible loss of data
+d:\soft_projects\tinypro\tinypro\tinypro\tinypro.cpp(125): warning C4244: 'initializing': conversion from 'float' to 'size_t', possible loss of data
   tinypro.vcxproj -> D:\soft_projects\tinypro\tinypro\x64\Debug\tinypro.exe
