@@ -152,15 +152,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="framebuffer.cpp" />
+    <ClCompile Include="map.cpp" />
+    <ClCompile Include="textures.cpp" />
     <ClCompile Include="tinypro.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <LanguageStandard Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">stdcpp17</LanguageStandard>
     </ClCompile>
+    <ClCompile Include="utils.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="framebuffer.h" />
+    <ClInclude Include="map.h" />
+    <ClInclude Include="player.h" />
     <ClInclude Include="profile.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="test_runner.h" />
+    <ClInclude Include="textures.h" />
+    <ClInclude Include="utils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
