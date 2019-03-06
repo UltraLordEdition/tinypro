@@ -154,6 +154,7 @@
   <ItemGroup>
     <ClCompile Include="framebuffer.cpp" />
     <ClCompile Include="map.cpp" />
+    <ClCompile Include="sprite.cpp" />
     <ClCompile Include="textures.cpp" />
     <ClCompile Include="tinypro.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
