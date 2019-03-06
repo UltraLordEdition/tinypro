@@ -166,6 +166,7 @@
     <ClInclude Include="map.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="profile.h" />
+    <ClInclude Include="sprite.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="test_runner.h" />
     <ClInclude Include="textures.h" />
